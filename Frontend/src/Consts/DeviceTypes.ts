@@ -1,0 +1,1 @@
+export enum DeviceTypes {Lamp, PowerSocket }; 

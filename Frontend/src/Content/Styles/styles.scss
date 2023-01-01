@@ -1,0 +1,35 @@
+@import "https://cdn-app.sberdevices.ru/shared-static/0.0.0/styles/SBSansText.0.1.0.css";
+
+.device-image-container{
+    width: 100%; 
+    display: flex;
+    align-items: center;
+}
+
+.device-settings-header{
+    padding: 30px;
+    display: flex;
+    flex-direction: row;
+}
+
+.settings-header{
+    width: 80%;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+}
+
+.back-to-devices{
+    width: 10%;
+    align-self: center;
+    cursor: pointer;
+}
+
+.image-on { 
+    filter: invert(100%); 
+}
+
+.device-card{
+    cursor: pointer;
+}
