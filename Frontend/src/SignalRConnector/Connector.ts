@@ -1,25 +1,51 @@
 import * as signalR from "@microsoft/signalr";
+import { TIMEOUT } from "dns";
 import { Command } from "../Models/Command";
 import { DeviceState } from "../Models/DeviceState";
 
 
 class Connector {
     private connection: signalR.HubConnection;
-    public events: (onMessageReceived: (state: DeviceState) => void) => void;
+    public events: (onMessageReceived: (state: DeviceState) => void, onConnected: () => void, onDisconnected: () => void) => void;
+    private onconnected: () => void;
     static instance: Connector;
     constructor() {
         this.connection = new signalR.HubConnectionBuilder()
             .withUrl(process.env.REACT_APP_HUB_ADDRESS ?? "")
             .withAutomaticReconnect()
             .build();
-        this.connection.start().catch(err => document.write(err));
-        this.events = (onMessageReceived) => {
-        this.connection.on("ChangesHandler", (state: DeviceState) => {
-            onMessageReceived(state);
-        });
+
+        this.connect();
+        
+        this.events = (onMessageReceived, onConnected, onDisconnected) => {
+            this.connection.on("deviceChange", (state: DeviceState) => {
+                onMessageReceived(state);
+            });
+
+            this.onconnected = onConnected;
+
+            this.connection.onclose(error => {
+                onDisconnected();
+              });
+            
+            this.connection.onreconnecting(error => {
+            onDisconnected();
+            });
+            
+            this.connection.onreconnected(connectionId => {
+                onConnected();
+                this.subscribeForChanges();
+            });
         };
+
+
+       
+
     }
-    public subscribeForChanges = () =>{
+    public State = () =>{
+        return this.connection.state;
+    }
+    private subscribeForChanges = () =>{
         this.connection.send("SubscribeDevicesChanges").then(x => console.log("sent message to subscribe for devices updates"))
     }
     public sendCommand = (command: Command) => {
@@ -29,6 +55,21 @@ class Connector {
         if (!Connector.instance)
             Connector.instance = new Connector();
         return Connector.instance;
+    }
+
+    public  async connect(){
+        let isConnected = false;
+        while(!isConnected){
+            this.connection.start()
+                .then(_ => {
+                    isConnected = true;
+                    this.onconnected();
+                    this.subscribeForChanges();
+                })
+                .catch(err => console.log(err));
+            await  new Promise( res => setTimeout(res, 1000) ); 
+        }
+
     }
 }
 export default Connector.getInstance();

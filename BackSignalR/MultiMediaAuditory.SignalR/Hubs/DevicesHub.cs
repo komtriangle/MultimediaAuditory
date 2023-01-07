@@ -1,62 +1,71 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
+using MQTTnet;
 using MultiMediaAuditory.SignalR.Models;
-using MultiMediaAuditory.SignalR.Models.Enums;
 using MultiMediaAuditory.SignalR.MQTT;
-using MultiMediaAuditory.SignalR.MQTT.Configuration;
-using Serilog;
+using MultiMediaAuditory.SignalR.MQTT.Utils;
 using System;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace MultiMediaAuditory.SignalR.Hubs
 {
 	public class DevicesHub : Hub
 	{
-		private readonly MqttConfig _mqttConfig;
+		private IHubContext<DevicesHub> _hubContext;
 		private readonly IMqttConnector _mqttConnector;
 		private readonly ILogger<DevicesHub> _logger;
 
-		public DevicesHub(IMqttConnector mqttConnector, ILogger<DevicesHub> logger)
+		public DevicesHub(IMqttConnector mqttConnector, IHubContext<DevicesHub> hubContext, ILogger<DevicesHub> logger)
 		{
 			_mqttConnector = mqttConnector;
+			_hubContext = hubContext;
 			_logger = logger;
 		}
 
 		public async Task ReceiveCommand(RequestModel request)
 		{
-			try
-			{
-				await _mqttConnector.Publish(request);
-				_logger.LogInformation("Пакет: {@request} отправлен в MQTT", request);
-			}
-			catch(Exception ex)
-			{
-				_logger.LogError(ex,"Ошибка при тправке пакета: {@request} в MQTT", request);
+			await _mqttConnector.Publish(request);
 
-			}
-
-			await Clients.All.SendAsync("deviceChange", new ResponseModel()
+			var response = new ResponseModel()
 			{
-				DeviceId= request.DeviceId,
+				DeviceId = request.DeviceId,
 				ControlName = request.ControlName,
-				Value = request.Value != "on" ? "off": "on"
-			});
+				Value = request.Value,
+			};
 		}
 
 		/// <summary>
 		/// Подписка на получение событий обновлений от устройств
 		/// </summary>
 		/// <returns></returns>
-		public async Task SubscribeDevicesChanges()
+		public void SubscribeDevicesChanges()
 		{
-			 
+			_mqttConnector.SubscribeToChanges();
+			_mqttConnector.RegisterChangesHandler(ChangesHandler);
+		}
+
+		private void ChangesHandler(MqttApplicationMessageReceivedEventArgs e)
+		{
+			try
+			{
+				string topic = e.ApplicationMessage.Topic;
+
+				if(string.IsNullOrWhiteSpace(topic) == false)
+				{
+					string payload = Encoding.UTF8.GetString(e.ApplicationMessage.Payload);
+
+					_logger.LogInformation("Получено сообщение: {@payload} из топика: {@topic}", payload, topic);
+
+				 	_hubContext.Clients.All.SendAsync("deviceChange", MqttHelper.ParseResponseModel(topic, payload)).Wait();
+				}
+			}
+			catch(Exception ex)
+			{
+				_logger.LogError(ex, "Ошибка во время обработки сообщения: {@e}", e);
+			}
 
 		}
 
-		private async Task ProcessLampCommand(RequestModel request)
-		{
-			//await Clients.All.SendAsync("messageReceived", user, message);
-		}
 	}
 }

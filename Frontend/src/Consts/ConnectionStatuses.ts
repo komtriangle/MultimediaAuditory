@@ -1,0 +1,1 @@
+export enum ConnectionStatuses {Connected, Disconnected}; 

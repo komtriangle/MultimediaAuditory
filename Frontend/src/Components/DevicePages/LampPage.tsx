@@ -35,25 +35,24 @@ const LampPage = (props: any) =>{
     return(
        <>
         <DeviceSettingsHeader/>
-       <Container className='device-image-container'>
-         <Image
-                    src={lamp}
-                    width='20%'
-                    height='20%'
-            />
-
-            <Headline4>{device.name}</Headline4>
-            <BodyXS style={{color: colorValues.secondary, marginBottom: '20px'}}>{device.isOn ? "Включена" : "Выключена"}</BodyXS>
-            
-            <Button onClick={onClickOnOff} view="clear">
-                <img className={device.isOn === true ? 'image-on':''}
-                        src={on_off}
-                        width='50px'
-                        height='50px'
+        <Container className='device-image-container'>
+            <Image
+                        src={lamp}
+                        width='20%'
+                        height='20%'
                 />
-            </Button>
-       </Container>
-      
+
+                <Headline4>{device.name}</Headline4>
+                <BodyXS style={{color: colorValues.secondary, marginBottom: '20px'}}>{device.isOn ? "Включена" : "Выключена"}</BodyXS>
+                
+                <Button onClick={onClickOnOff} view="clear">
+                    <img className={device.isOn === true ? 'image-on':''}
+                            src={on_off}
+                            width='50px'
+                            height='50px'
+                    />
+                </Button>
+        </Container>
        </>
     )
 }

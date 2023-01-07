@@ -5,8 +5,11 @@ using MQTTnet.Client;
 using MQTTnet.Client.Options;
 using MQTTnet.Protocol;
 using MQTTnet.Server;
+using System;
 using System.Net;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace MQTT.Test.MQTT
 {
@@ -21,75 +24,57 @@ namespace MQTT.Test.MQTT
 
 			_mqttConfig = mqttConfig;
 
-			var a = IPAddress.Parse(_mqttConfig.Host);
-			var options = new MqttServerOptionsBuilder()
-												 .WithDefaultEndpointBoundIPAddress(IPAddress.Parse(_mqttConfig.Host))
-												 .WithDefaultEndpointPort(_mqttConfig.Port)
-												 .WithApplicationMessageInterceptor(OnNewMessage)
-												 .WithDefaultCommunicationTimeout(TimeSpan.FromSeconds(10))
-												   .WithConnectionValidator(t =>
-												   {
-													   if(t.Username != mqttConfig.UserName || t.Password != mqttConfig.Password)
-													   {
-														   t.ReasonCode = MqttConnectReasonCode.BadUserNameOrPassword;
-													   }
-													   t.ReasonCode = MqttConnectReasonCode.Success;
-												   })
-												   .Build();
+			var factory = new MqttFactory();
+
+			_mqttClient = factory.CreateMqttClient();
+
+			_options = new MqttClientOptionsBuilder()
+									 .WithTcpServer(_mqttConfig.Host, _mqttConfig.Port)
+									.WithCredentials(_mqttConfig.UserName, _mqttConfig.Password)
+									.WithClientId(Guid.NewGuid().ToString().Substring(0, 5))
+									.Build();
 
 
-			IMqttServer mqttServer = new MqttFactory().CreateMqttServer();
+			_mqttClient.ConnectAsync(_options, CancellationToken.None).Wait();
 
-			try
+			 _mqttClient.SubscribeAsync(new TopicFilterBuilder()
+				.WithTopic("/devices/#")
+				.WithQualityOfServiceLevel((MQTTnet.Protocol.MqttQualityOfServiceLevel)1)
+				.Build()).Wait();
+
+			_mqttClient.UseApplicationMessageReceivedHandler(e =>
 			{
-				mqttServer.StartAsync(options).Wait();
-			}
-			catch(Exception ex)
-			{
-
-			}
-		}
-
-		public void OnNewMessage(MqttApplicationMessageInterceptorContext context)
-		{
-			var payload = context.ApplicationMessage?.Payload == null ? null : Encoding.UTF8.GetString(context.ApplicationMessage?.Payload);
-
-			MessageCounter++;
-
-			Console.WriteLine
-			(
-				"MessageId: {MessageCounter} - TimeStamp: {TimeStamp} -- Message: ClientId = {clientId}, Topic = {topic}, Payload = {payload}, QoS = {qos}, Retain-Flag = {retainFlag}",
-				MessageCounter,
-				DateTime.Now,
-				context.ClientId,
-				context.ApplicationMessage?.Topic,
-				payload,
-				context.ApplicationMessage?.QualityOfServiceLevel,
-				context.ApplicationMessage?.Retain);
-		}
-
-
-		private void RegisterOnDisconnectedHandler()
-		{
-			_mqttClient.UseApplicationMessageReceivedHandler(async e =>
-			{
-				
-				await Task.Delay(TimeSpan.FromSeconds(5));
-				int attemp = 1;
-				while(true)
+				try
 				{
-					try
+					string topic = e.ApplicationMessage.Topic;
+
+					topic = topic.Replace("/devices/", "/devices_changes/");
+
+					if(string.IsNullOrWhiteSpace(topic) == false)
 					{
-						
-						await _mqttClient.ConnectAsync(_options);
+						string payload = Encoding.UTF8.GetString(e.ApplicationMessage.Payload);
+						Console.WriteLine($"Topic: {topic}. Message Received: {payload}");
+
+						try
+						{
+							_mqttClient.PublishAsync(topic, payload);
+						}
+						catch(Exception ex)
+						{
+							Console.WriteLine(ex.Message);
+						}
 					}
-					catch(Exception ex)
-					{
 
 
-					}
+					
+				}
+				catch(Exception ex)
+				{
+					Console.WriteLine(ex.Message, ex);
 				}
 			});
 		}
+
+		
 	}
 }

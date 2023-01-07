@@ -1,0 +1,43 @@
+version: '3.4'
+
+services:
+  multimediaauditory.signalr:
+    image: ${DOCKER_REGISTRY-}multimediaauditorysignalr
+    build:
+      context: ../BackSignalR
+      dockerfile: MultiMediaAuditory.SignalR/Dockerfile
+    ports:
+      - '44392:80'
+  test-mqtt-server:
+    image: ${DOCKER_REGISTRY-}test-mqtt-server
+    build:
+      context: ../BackSignalR
+      dockerfile: MQTT.Test/Dockerfile
+  frontend:
+    image: ${DOCKER_REGISTRY-}front
+    build:
+      context: ../Frontend
+      dockerfile: Dockerfile
+    ports:
+      - '8000:3000'
+  mqtt:
+    container_name: mqtt
+    image: eclipse-mosquitto
+    restart: always
+    volumes:
+      - ../mosquitto/config:/mosquitto/config
+      - ../mosquitto/data:/mosquitto/data
+      - ../mosquitto/log:/mosquitto/log
+    ports:
+      - 1883:1883
+      - 9001:9001
+  seq:
+    container_name: seq
+    image: datalust/seq
+    restart: always
+    environment:
+      - ACCEPT_EULA=Y
+    volumes:
+      - ../seq/data:/seq/data
+    ports:
+      - "5340:80"

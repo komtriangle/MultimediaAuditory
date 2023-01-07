@@ -8,7 +8,7 @@ namespace MultiMediaAuditory.SignalR.Models
 	public class ResponseModel
 	{
 		/// <summary>
-		/// Название устройста
+		/// Идентификатор устройста
 		/// </summary>
 		public string DeviceId { get; set; }
 

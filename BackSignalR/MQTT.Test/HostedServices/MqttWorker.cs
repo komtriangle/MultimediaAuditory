@@ -1,6 +1,9 @@
-﻿using Microsoft.Extensions.Options;
+﻿using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 using MQTT.Test.Configuration;
 using MQTT.Test.MQTT;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace MQTT.Test.HostedServices
 {

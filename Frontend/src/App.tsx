@@ -10,19 +10,26 @@ import { connect } from "react-redux"
 import { bindActionCreators } from "redux";
 import { storeActions } from './Store/store';
 import getUpdatedState from './Store/devicesStateUpdater';
+import SpinnerPage from './Components/SpinnerPage';
+import { ConnectionStatuses } from './Consts/ConnectionStatuses';
 
 function App(props:any) {
   const {  events } = Connector;
   useEffect(() => {
     //Connector.subscribeForChanges();
-    events((state) =>{
-       props.setDevices(getUpdatedState(state));
-    })
+    events((state) => props.setDevices(getUpdatedState(state)),
+      () => props.setConnectionStatus(ConnectionStatuses.Connected), 
+      () => props.setConnectionStatus(ConnectionStatuses.Disconnected))
   },[]);
+
+  useEffect(() =>{
+    console.log("state changed")
+  },[Connector.State])
  
   return (
 
     <>
+    <SpinnerPage/>
      <Router>
         <Routes>
           <Route path={PAGES_TYPE.DEVICES} element={<DevicesPage />}  />
@@ -41,7 +48,8 @@ function mapStateToProps(state: any) {
 
 function mapDispatchToProps(dispatch: any) {
   return bindActionCreators({
-     setDevices: storeActions.setDevices
+     setDevices: storeActions.setDevices,
+     setConnectionStatus: storeActions.setConnectionStatus
   }, dispatch)
 
 }

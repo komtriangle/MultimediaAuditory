@@ -5,9 +5,11 @@ import powerSocket from '../Content/Images/output-onlinepngtools.png';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from "redux-thunk";
 import { composeWithDevTools } from 'redux-devtools-extension';
+import { ConnectionStatuses } from '../Consts/ConnectionStatuses';
 
 
 const setDevices = "SET-DEVICES";
+const setConnectionStatus = "SET-CONNECTION_STATUS";
 
 let initialState: IStore = {
     devices:
@@ -33,7 +35,10 @@ let initialState: IStore = {
             isOn:false,
             image: powerSocket
         }
-    ]
+    ],
+    Connection:{
+        status: ConnectionStatuses.Disconnected
+    }
 }
 
 export const storeActions = {
@@ -45,7 +50,16 @@ export const storeActions = {
                 devices
             }
         })
-    }  
+    },
+
+    setConnectionStatus: (status: ConnectionStatuses) => async (dispatch: any) =>{
+        dispatch({
+            type: setConnectionStatus,
+            payload:{
+                status
+            }
+        })
+    }
 }
 
 
@@ -56,6 +70,16 @@ export const reducer = (state: IStore = initialState, action: any): IStore => {
             return {
                 ...state,
                 devices: [...devices]
+            }
+        }
+        case setConnectionStatus:{
+            const {status} = action.payload;
+            return{
+                ...state,
+                Connection:{
+                    ...state.Connection,
+                    status: status
+                }
             }
         }
         default:

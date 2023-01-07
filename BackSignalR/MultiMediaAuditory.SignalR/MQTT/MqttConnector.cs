@@ -30,7 +30,7 @@ namespace MultiMediaAuditory.SignalR.MQTT
 			_mqttClient = factory.CreateMqttClient();
 
 			_options = new MqttClientOptionsBuilder()
-									 .WithTcpServer(_mqttConfig.Host, _mqttConfig.Port)
+									.WithTcpServer(_mqttConfig.Host, _mqttConfig.Port)
 									.WithCredentials(_mqttConfig.UserName, _mqttConfig.Password)
 									.WithClientId(Guid.NewGuid().ToString().Substring(0, 5))
 									.Build();
@@ -38,14 +38,7 @@ namespace MultiMediaAuditory.SignalR.MQTT
 			RegisterOnConnectionHandler();
 			RegisterOnDisconnectedHandler();
 
-			try
-			{
-				_mqttClient.ConnectAsync(_options, CancellationToken.None).Wait();
-			}
-			catch(Exception ex)
-			{
-				_logger.LogError(ex, "Ошибка по время попытки устновить соединение с брокером MQTT");
-			}
+			_mqttClient.ConnectAsync(_options, CancellationToken.None).Wait();
 		}
 
 		public async Task Publish(RequestModel request)
@@ -61,6 +54,19 @@ namespace MultiMediaAuditory.SignalR.MQTT
 			{
 				_logger.LogError(ex, $"Ошибка во время отправки сообщения в топик: {topic}");
 			}
+		}
+
+		public void SubscribeToChanges()
+		{
+			_mqttClient.SubscribeAsync(new TopicFilterBuilder()
+			   .WithTopic("/devices_changes/#")
+			   .WithQualityOfServiceLevel((MQTTnet.Protocol.MqttQualityOfServiceLevel)1)
+			   .Build()).Wait();
+		}
+
+		public void RegisterChangesHandler(Action<MqttApplicationMessageReceivedEventArgs> action)
+		{
+			_mqttClient.UseApplicationMessageReceivedHandler(action);
 		}
 
 		private string CreateTopicName(RequestModel request)

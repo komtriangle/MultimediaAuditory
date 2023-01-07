@@ -24,10 +24,8 @@ export default function getUpdatedState(state: DeviceState){
 
 
 function setNewDevice(deviceState: IDeviceState, allDevices: IDeviceState[]){
-    console.log("1 ", allDevices);
      const a =  allDevices.map(
         (device: IDeviceState) => device.id === deviceState.id ? {...deviceState} : {...device});
-    console.log("2 ", a);
     return a;
 
         
