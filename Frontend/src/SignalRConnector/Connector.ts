@@ -1,5 +1,4 @@
 import * as signalR from "@microsoft/signalr";
-import { TIMEOUT } from "dns";
 import { Command } from "../Models/Command";
 import { DeviceState } from "../Models/DeviceState";
 
@@ -11,7 +10,11 @@ class Connector {
     static instance: Connector;
     constructor() {
         this.connection = new signalR.HubConnectionBuilder()
-            .withUrl(process.env.REACT_APP_HUB_ADDRESS ?? "")
+            .withUrl(process.env.REACT_APP_HUB_ADDRESS ?? "",
+            {
+                skipNegotiation: true,
+                transport: signalR.HttpTransportType.WebSockets
+            })
             .withAutomaticReconnect()
             .build();
 
@@ -37,10 +40,6 @@ class Connector {
                 this.subscribeForChanges();
             });
         };
-
-
-       
-
     }
     public State = () =>{
         return this.connection.state;

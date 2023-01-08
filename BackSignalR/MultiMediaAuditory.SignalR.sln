@@ -9,8 +9,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQTT.Test", "MQTT.Test\MQTT
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MultiMediaAuditory.Core", "MultiMediaAuditory.Core\MultiMediaAuditory.Core.csproj", "{EBD921E1-B8F1-43B5-8E2D-EE3AE29C4D50}"
 EndProject
-Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{0989B38D-4066-42AA-9B7E-25D18A6EC638}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,10 +27,6 @@ Global
 		{EBD921E1-B8F1-43B5-8E2D-EE3AE29C4D50}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EBD921E1-B8F1-43B5-8E2D-EE3AE29C4D50}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EBD921E1-B8F1-43B5-8E2D-EE3AE29C4D50}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0989B38D-4066-42AA-9B7E-25D18A6EC638}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0989B38D-4066-42AA-9B7E-25D18A6EC638}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0989B38D-4066-42AA-9B7E-25D18A6EC638}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0989B38D-4066-42AA-9B7E-25D18A6EC638}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

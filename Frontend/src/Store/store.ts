@@ -11,7 +11,7 @@ import { ConnectionStatuses } from '../Consts/ConnectionStatuses';
 const setDevices = "SET-DEVICES";
 const setConnectionStatus = "SET-CONNECTION_STATUS";
 
-let initialState: IStore = {
+export const initialState: IStore = {
     devices:
     [
         {
@@ -88,5 +88,5 @@ export const reducer = (state: IStore = initialState, action: any): IStore => {
     }
 }
 
-export const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)));
+export const store = createStore(reducer, initialState, composeWithDevTools(applyMiddleware(thunk)));
 

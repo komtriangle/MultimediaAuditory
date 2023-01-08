@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { Routes, Route, HashRouter,  } from 'react-router-dom';
 import './App.css';
 import LampPage from './Components/DevicePages/LampPage';
 import DevicesPage from './Components/DevicesPage';
@@ -8,10 +8,10 @@ import Connector from './SignalRConnector/Connector'
 import './Content/Styles/styles.scss';
 import { connect } from "react-redux"
 import { bindActionCreators } from "redux";
-import { storeActions } from './Store/store';
+import { initialState, storeActions } from './Store/store';
 import getUpdatedState from './Store/devicesStateUpdater';
 import SpinnerPage from './Components/SpinnerPage';
-import { ConnectionStatuses } from './Consts/ConnectionStatuses';
+import { ConnectionStatuses } from './Consts/ConnectionStatuses';;
 
 function App(props:any) {
   const {  events } = Connector;
@@ -24,18 +24,19 @@ function App(props:any) {
 
   useEffect(() =>{
     console.log("state changed")
+    console.log(props.state)
   },[Connector.State])
  
   return (
 
     <>
     <SpinnerPage/>
-     <Router>
-        <Routes>
+     <HashRouter >
+         <Routes>
           <Route path={PAGES_TYPE.DEVICES} element={<DevicesPage />}  />
-          <Route path={`${PAGES_TYPE.DEVICE}/:id`} element={<LampPage />}  />
-        </Routes>
-      </Router>
+            <Route path={`${PAGES_TYPE.DEVICE}/:id`} element={<LampPage />}  />
+         </Routes>
+      </HashRouter>
     </>
   );
 }

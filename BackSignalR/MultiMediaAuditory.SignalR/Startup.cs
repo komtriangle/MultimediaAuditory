@@ -7,6 +7,7 @@ using MultiMediaAuditory.SignalR.Hubs;
 using MultiMediaAuditory.SignalR.MQTT;
 using MultiMediaAuditory.SignalR.MQTT.Configuration;
 using Serilog;
+using System;
 
 namespace MultiMediaAuditory.SignalR
 {
@@ -42,6 +43,12 @@ namespace MultiMediaAuditory.SignalR
 				app.UseDeveloperExceptionPage();
 			}
 
+			app.UseWebSockets(new WebSocketOptions
+			{
+				KeepAliveInterval = TimeSpan.FromSeconds(120),
+			});
+
+			app.UseFileServer();
 			app.UseRouting();
 
 			app.UseCors(x => x
@@ -49,6 +56,9 @@ namespace MultiMediaAuditory.SignalR
 			   .AllowAnyHeader()
 			   .SetIsOriginAllowed(origin => true) // allow any origin
 			   .AllowCredentials());
+
+			
+
 
 			app.UseEndpoints(endpoints =>
 			{
