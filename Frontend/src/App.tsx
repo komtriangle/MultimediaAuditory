@@ -21,11 +21,6 @@ function App(props:any) {
       () => props.setConnectionStatus(ConnectionStatuses.Connected), 
       () => props.setConnectionStatus(ConnectionStatuses.Disconnected))
   },[]);
-
-  useEffect(() =>{
-    console.log("state changed")
-    console.log(props.state)
-  },[Connector.State])
  
   return (
 
