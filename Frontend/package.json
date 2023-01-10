@@ -9,6 +9,7 @@
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.3",
     "@salutejs/plasma-tokens": "^1.32.0",
     "@salutejs/plasma-ui": "^1.154.0",
+    "@sberdevices/assistant-client": "^5.0.2",
     "@sberdevices/plasma-icons": "^1.75.0",
     "@sberdevices/plasma-tokens": "^1.17.0",
     "@sberdevices/plasma-ui": "^1.95.0",
@@ -101,6 +102,7 @@
     ]
   },
   "devDependencies": {
+    "@types/styled-components": "^5.1.26",
     "cordova-android": "^10.1.2",
     "dotenv-webpack": "^8.0.1"
   },
@@ -164,8 +166,6 @@
     "platforms": [
       "android"
     ],
-    "plugins": {
-      
-    }
+    "plugins": {}
   }
 }

@@ -5,7 +5,6 @@ import  App  from './App';
 import reportWebVitals from './reportWebVitals';
 import { DeviceThemeProvider } from '@sberdevices/plasma-ui/components/Device';
 import { Provider } from 'react-redux'
-import { GlobalStyle } from './GlobalStyle';
 import {  store } from './Store/store';
 
 let startApp = () => {
@@ -20,7 +19,7 @@ let startApp = () => {
     <DeviceThemeProvider
       {...DeviceThemeProviderrProps}
       >
-      <GlobalStyle />
+
       <Provider store={store}>
         <App />
       </Provider>

@@ -18,6 +18,7 @@ const LampPage = (props: any) =>{
     const device = currentDevice();
 
     function onClickOnOff(){
+        console.log(device.isOn)
         if(device.isOn === true){
             sendCommand({DeviceId:`${id}`,  ControlName: 'on-off', Value: 'off'});
         }
@@ -37,7 +38,7 @@ const LampPage = (props: any) =>{
         <DeviceSettingsHeader/>
         <Container className='device-image-container'>
             <Image
-                        src={lamp}
+                        src={device.image}
                         width='20%'
                         height='20%'
                 />

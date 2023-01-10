@@ -1,7 +1,7 @@
 import { DeviceTypes } from '../Consts/DeviceTypes';
 import IStore from './Interfaces/IStore'
 import lamp from '../Content/Images/lamp.png';
-import powerSocket from '../Content/Images/output-onlinepngtools.png';
+import powerSocket from '../Content/Images/power-socket.png';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from "redux-thunk";
 import { composeWithDevTools } from 'redux-devtools-extension';
@@ -31,7 +31,7 @@ export const initialState: IStore = {
         {
             id: "2",
             name:"Розетка 1",
-            type: DeviceTypes.Lamp,
+            type: DeviceTypes.PowerSocket,
             isOn:false,
             image: powerSocket
         }

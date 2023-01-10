@@ -1,9 +1,10 @@
 import { Card, CardContent, CardBody,CardMedia } from '@sberdevices/plasma-ui';
 import { Col } from '@sberdevices/plasma-ui/components/Grid';
-import {bodyL, bodyS } from '@salutejs/plasma-ui';
 import PropTypes from 'prop-types';
 import { PAGES_TYPE } from '../Consts/Pages';
 import {useNavigate} from "react-router-dom"
+import { accent, primary } from '@salutejs/plasma-tokens'
+import { BodyL, BodyS } from '@salutejs/plasma-ui';;
 
 export const DeviceCard = ({id, image, name, status}:
     {id: string,
@@ -30,8 +31,8 @@ export const DeviceCard = ({id, image, name, status}:
                         placeholder={image}
                          />
                         
-                        <div style={bodyL}>{name}</div>
-                        <div className={status ? "device-on": "device-off"} style={bodyS}>{status ? "Включен": "Выключен"}</div>
+                        <BodyL >{name}</BodyL>
+                        <BodyS style={status ? {color:accent}: {color: primary}}> {status ? "Вкл.": "Выкл."}</BodyS>
                     </CardContent>
                 </CardBody>
             </Card>
