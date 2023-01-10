@@ -1,5 +1,4 @@
 import {createAssistant, createSmartappDebugger} from "@sberdevices/assistant-client";
-import EventEmitter from 'eventemitter3';
 import React, {
   useRef,
   useEffect,

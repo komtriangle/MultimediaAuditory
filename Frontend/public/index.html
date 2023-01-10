@@ -37,6 +37,21 @@
     <div id="root"></div>
 	 <script src="index.js"></script>
    <script src="cordova.js" type="text/javascript"></script>
+   <script crossorigin src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@sberdevices/assistant-client@4.7.0/umd/assistant.development.min.js"></script>
+  <script>
+    const client = assistant.createSmartappDebugger({
+              // Токен из Кабинета разработчика
+              token: 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI3ZDEzODdhYWNkYmI2NGUzMDUxNzg0N2RlYTc4MDAzZjEwODYxNWJjZWRiMzU5ZmI4ZjViYjFlZDhiNDk1N2ZjNTM5YmU5MjcwMDQyNjI5OCIsImF1ZCI6IlZQUyIsImV4cCI6MTY3MzQ1NTg4OSwiaWF0IjoxNjczMzY5NDc5LCJpc3MiOiJLRVlNQVNURVIiLCJ0eXBlIjoiQmVhcmVyIiwianRpIjoiMWUxYWQ2NWItNDliYy00OTA3LWE4NzQtNWRkMzI0NzA1NWFmIiwic2lkIjoiMjM4ODU4MTItOGE1NC00NjhmLWFiNTItNDAzNjg2NWFjNDJlIn0.tY2AaQse9rH7xeFuOYdsUc1JFhrRCDn1jMzZt_365pBNwPrvpSxQhapoRiyL8_OH3Xn9o-DQOm8cc7wVHE9t7SOCcALbV0F6e3J4wlB2nyF24_7p9c3sbFy6JUk3TASDENTyk4PLuGIEMli9HcygK3AnzdhjS2L7Xt6H4Wbd27DPDHvjLhAwuFgigo23hoLKx132drbCGkY-z7QX9DeZaW-pIGxdgzGRPeTE-nojr638kEhfv5RGlqC6pYIGeL_Mn1J7vOcdB_UqW4VqNqv4fcmJ-N8YQA8ztfCDaLA3lC9HSV5aZzlo83ARp1FdaZJ1qPxOJUc0o_96BbVe9aYljPTZWX7W-MsVZ_hZmVqeWRsnsv5rqDn4CFWUZs3TZ-yTAIXOsS-3IWxGHc44tw7AqCAvFyIsND2MDM0HkGlYx-QDACbm1AYtXq2h30UgMt3bboNOE9Ddro1DUUhiCKUUAYnlPswGnKx02ESk-C8lcJk47PVZKbvgeL5bEgtD0lXHV6SGdElILJHzDx6bVDhiBsi4CtKjMugCIp0Wfb0qkh-Xe4oasAJ3-4L7FcRpL8fHPVyuZ_Mis-qPJmGUwZ6TFjq3vx3FGx9SaQ5k3wrrcjhzyzDe-SZGrEJo9RxIBzcSiFQ56R4R-yBPPHB_Ua32RmHHSqgegONbV25IZvKoqPw',
+              // Пример фразы для запуска смартапа
+              initPhrase: 'Хочу попкорн',
+              // Текущее состояние смартапа
+              getState: () => ({}),
+              // Состояние смартапа, с которым он будет восстановлен при следующем запуске
+              getRecoveryState: () => ({}),
+          });
+  </script>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
