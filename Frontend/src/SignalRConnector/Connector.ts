@@ -6,7 +6,7 @@ import { DeviceState } from "../Models/DeviceState";
 class Connector {
     private connection: signalR.HubConnection;
     public events: (onMessageReceived: (state: DeviceState) => void, onConnected: () => void, onDisconnected: () => void) => void;
-    private onconnected: () => void;
+    public onConnected: () => void;
     static instance: Connector;
     constructor() {
         this.connection = new signalR.HubConnectionBuilder()
@@ -25,7 +25,7 @@ class Connector {
                 onMessageReceived(state);
             });
 
-            this.onconnected = onConnected;
+            this.onConnected = onConnected;
 
             this.connection.onclose(error => {
                 onDisconnected();
@@ -57,17 +57,17 @@ class Connector {
     }
 
     public  async connect(){
-        // let isConnected = false;
-        // while(!isConnected){
-        //     this.connection.start()
-        //         .then(_ => {
-        //             isConnected = true;
-        //             this.onconnected();
-        //             this.subscribeForChanges();
-        //         })
-        //         .catch(err => console.log(err));
-        //     await  new Promise( res => setTimeout(res, 1000) ); 
-        // }
+        let isConnected = false;
+        while(!isConnected){
+            this.connection.start()
+                .then(_ => {
+                    isConnected = true;
+                    this.onConnected();
+                    this.subscribeForChanges();
+                })
+                .catch(err => console.log(err));
+            await  new Promise( res => setTimeout(res, 1000) ); 
+        }
 
     }
 }
