@@ -9,7 +9,8 @@ const  SpinnerPage = ({connectionStatus}:
     {connectionStatus: ConnectionStatuses}) => {
 
     function isShowSpinner(): Boolean {
-        return connectionStatus === ConnectionStatuses.Disconnected;
+        return false
+        //connectionStatus === ConnectionStatuses.Disconnected;
     }
 
     return (

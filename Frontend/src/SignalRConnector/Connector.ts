@@ -31,7 +31,7 @@ class Connector {
                 onDisconnected();
               });
             
-            this.connection.onreconnecting(error => {
+            this.connection.onreconnecting(error => { 
             onDisconnected();
             });
             
@@ -57,17 +57,17 @@ class Connector {
     }
 
     public  async connect(){
-        let isConnected = false;
-        while(!isConnected){
-            this.connection.start()
-                .then(_ => {
-                    isConnected = true;
-                    this.onconnected();
-                    this.subscribeForChanges();
-                })
-                .catch(err => console.log(err));
-            await  new Promise( res => setTimeout(res, 1000) ); 
-        }
+        // let isConnected = false;
+        // while(!isConnected){
+        //     this.connection.start()
+        //         .then(_ => {
+        //             isConnected = true;
+        //             this.onconnected();
+        //             this.subscribeForChanges();
+        //         })
+        //         .catch(err => console.log(err));
+        //     await  new Promise( res => setTimeout(res, 1000) ); 
+        // }
 
     }
 }
