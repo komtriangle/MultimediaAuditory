@@ -5,8 +5,8 @@ import { ConnectionStatuses } from '../Consts/ConnectionStatuses';
 import IStore from '../Store/Interfaces/IStore';
 
 
-const  SpinnerPage = ({connectionStatus}:
-    {connectionStatus: ConnectionStatuses}) => {
+const SpinnerPage = ({ connectionStatus }:
+    { connectionStatus: ConnectionStatuses }) => {
 
     function isShowSpinner(): Boolean {
         return false
@@ -14,19 +14,13 @@ const  SpinnerPage = ({connectionStatus}:
     }
 
     return (
-      <>
-       {isShowSpinner() === true ? 
-       (
-        <Container className='spinner-container'>
-                <Spinner/>
-        </Container>
-       )
-       :
-       (
-        <></>
-       )
-       }
-     </>
+        <>
+            {isShowSpinner() === true ?
+                (<Container className='spinner-container'>
+                    <Spinner />
+                </Container>) : (<></>)
+            }
+        </>
     )
 }
 
@@ -35,7 +29,6 @@ function mapStateToProps(state: IStore) {
     return {
         connectionStatus: state.Connection.status,
     }
-  }
-  
-  export default connect(mapStateToProps)(SpinnerPage)
-  
+}
+
+export default connect(mapStateToProps)(SpinnerPage)

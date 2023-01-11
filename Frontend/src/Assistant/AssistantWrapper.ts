@@ -30,16 +30,6 @@ export const AssistantWrapper = (type: string) => {
     sendAction({
       action_id: "hello_phrase"
     })
-  switch (type) {
-    case "init":
-      console.log("assistant")
-    assistantRef.current = initializeAssistant(() => assistantStateRef.current);
-    sendHello()
-    break;
-    default:
-      break
-  }
-  
   }
 
 }

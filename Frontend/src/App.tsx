@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { Routes, Route, HashRouter, } from 'react-router-dom';
 import './App.css';
-import LampPage from './Components/DevicePages/LampPage';
-import DevicesPage from './Components/DevicesPage';
+import LampPage from './Pages/LampPage';
+import DevicesPage from './Pages/DevicesPage';
 import { PAGES_TYPE } from './Consts/Pages';
 import Connector from './SignalRConnector/Connector'
 import './Content/Styles/styles.scss';
@@ -10,7 +10,7 @@ import { connect } from "react-redux"
 import { bindActionCreators } from "redux";
 import { initialState, storeActions } from './Store/store';
 import getUpdatedState from './Store/devicesStateUpdater';
-import SpinnerPage from './Components/SpinnerPage';
+import SpinnerPage from './Pages/SpinnerPage';
 import { ConnectionStatuses } from './Consts/ConnectionStatuses';
 import { GlobalStyle, CharacterId, CHAR_SBER } from './Components/GlobalStyles';
 import { createAssistant, createSmartappDebugger } from "@sberdevices/assistant-client";
@@ -27,7 +27,7 @@ export const initializeAssistant = (getState: any) => {
 };
 
 const App = (props: any) => {
-  const { events } = Connector;
+  const { events, sendCommand } = Connector;
   const assistantStateRef = useRef<any>();
   const assistantRef = useRef<ReturnType<typeof createAssistant>>();
   const [character, setCharacter] = useState<CharacterId>(CHAR_SBER);
@@ -57,6 +57,24 @@ const App = (props: any) => {
     })
   }
 
+  const handleAssistantAction = (action: any) => {
+    console.log('AssistantWrapper.dispatchAssistantAction:', action)
+
+    if (!action) return;
+
+    switch (action.command) {
+
+      case 'on':
+        sendCommand({ DeviceId: `${action.id}`, ControlName: 'on-off', Value: 'on' });
+        break;
+      case 'off':
+        sendCommand({ DeviceId: `${action.id}`, ControlName: 'on-off', Value: 'off' });
+        break;
+      default:
+        break;
+    }
+  }
+
   const handleAssistantDataEvent = (event: any) => {
     console.log('AssistantWrapper.handleAssistantDataEvent: event:', event);
     switch (event?.type) {
@@ -68,6 +86,7 @@ const App = (props: any) => {
         break;
 
       case "smart_app_data":
+        handleAssistantAction(event.action)
         break
 
       default:
@@ -76,14 +95,13 @@ const App = (props: any) => {
   }
 
   return (
-
     <>
       <GlobalStyle character={character}>
         <SpinnerPage />
         <HashRouter >
           <Routes>
             <Route path={PAGES_TYPE.DEVICES} element={<DevicesPage />} />
-            <Route path={`${PAGES_TYPE.DEVICE}/:id`} element={<LampPage />} />
+            <Route path={`${PAGES_TYPE.DEVICE}/:id`} element={<LampPage sendAction={sendAction} />} />
           </Routes>
         </HashRouter>
       </GlobalStyle>
