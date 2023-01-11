@@ -4,11 +4,10 @@ import { connect } from "react-redux";
 import { ConnectionStatuses } from '../Consts/ConnectionStatuses';
 import IStore from '../Store/Interfaces/IStore';
 
-
 const SpinnerPage = ({ connectionStatus }:
     { connectionStatus: ConnectionStatuses }) => {
 
-    function isShowSpinner(): Boolean {
+    const isShowSpinner = (): Boolean => {
         return false
         //connectionStatus === ConnectionStatuses.Disconnected;
     }
@@ -24,8 +23,7 @@ const SpinnerPage = ({ connectionStatus }:
     )
 }
 
-
-function mapStateToProps(state: IStore) {
+const mapStateToProps = (state: IStore) => {
     return {
         connectionStatus: state.Connection.status,
     }

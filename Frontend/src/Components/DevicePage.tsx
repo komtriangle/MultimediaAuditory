@@ -9,19 +9,16 @@ import LampPage from "../Pages/LampPage";
 const DevicePage = (props: any) => {
     const { id } = useParams();
     const navigate = useNavigate();
-    const device: IDeviceState = currentDevice();
-
-    if (device == undefined) {
-        navigate(`${PAGES_TYPE.DEVICES}`)
-    }
-
-
-    function currentDevice(): IDeviceState {
+    const currentDevice = (): IDeviceState => {
         const device = props.devices.find((d: IDeviceState) => d.id === id);
         return device;
     }
+    const device: IDeviceState = currentDevice();
+    if (!device) {
+        navigate(`${PAGES_TYPE.DEVICES}`)
+    }
 
-    function chooseDeviceComponent(device: IDeviceState) {
+    const chooseDeviceComponent = (device: IDeviceState) => {
         switch (device.type) {
             case DeviceTypes.Lamp:
                 return <LampPage />
@@ -37,13 +34,13 @@ const DevicePage = (props: any) => {
     )
 }
 
-function mapStateToProps(state: any) {
+const mapStateToProps = (state: any) => {
     return {
         devices: state.devices
     }
 }
 
-function mapDispatchToProps(dispatch: any) {
+const mapDispatchToProps = (dispatch: any) => {
     return bindActionCreators({
     }, dispatch)
 }

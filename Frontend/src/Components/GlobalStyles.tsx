@@ -21,7 +21,6 @@ const DocumentStyle = createGlobalStyle`
         min-height: 100vh;
     }
 `;
-//const ThemeStyle = createGlobalStyle(darkSber);
 const ThemeBackgroundSber = createGlobalStyle(darkSber);
 const ThemeBackgroundEva = createGlobalStyle(darkEva);
 const ThemeBackgroundJoy = createGlobalStyle(darkJoy);

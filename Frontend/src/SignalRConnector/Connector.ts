@@ -1,6 +1,6 @@
 import * as signalR from "@microsoft/signalr";
-import { Command } from "../Models/Command";
-import { DeviceState } from "../Models/DeviceState";
+import { Command } from "../Classes/Command";
+import { DeviceState } from "../Classes/DeviceState";
 
 
 class Connector {

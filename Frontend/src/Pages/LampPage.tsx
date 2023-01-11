@@ -7,16 +7,17 @@ import { connect } from "react-redux"
 import { bindActionCreators } from "redux";
 import Connector from '../SignalRConnector/Connector';
 import IDeviceState from '../Store/Interfaces/IDeviceState';
-import DeviceSettingsHeader from '../Components/DeviceSettingsHeader';
-
+import { DeviceSettingsHeader } from '../Components/DeviceSettingsHeader';
 
 const LampPage = (props: any) => {
-
     const { id } = useParams();
-    const { sendCommand, events } = Connector;
+    const { sendCommand } = Connector;
+    const currentDevice = () => {
+        const device = props.devices.find((d: IDeviceState) => d.id === id);
+        return device;
+    }
     const device = currentDevice();
-
-    function onClickOnOff() {
+    const onClickOnOff = () => {
         console.log(device.isOn, id)
         if (device.isOn === true) {
             //props.sendAction({action_id: "deviceOn"})
@@ -26,12 +27,6 @@ const LampPage = (props: any) => {
             //props.sendAction({action_id: "deviceOn"})
             sendCommand({ DeviceId: `${id}`, ControlName: 'on-off', Value: 'on' });
         }
-    }
-
-
-    function currentDevice() {
-        const device = props.devices.find((d: IDeviceState) => d.id === id);
-        return device;
     }
 
     return (
@@ -57,16 +52,15 @@ const LampPage = (props: any) => {
     )
 }
 
-function mapStateToProps(state: any) {
+const mapStateToProps = (state: any) => {
     return {
         devices: state.devices
     }
 }
 
-function mapDispatchToProps(dispatch: any) {
+const mapDispatchToProps = (dispatch: any) => {
     return bindActionCreators({
     }, dispatch)
-
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(LampPage)

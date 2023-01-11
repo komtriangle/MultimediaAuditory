@@ -1,6 +1,5 @@
 import { Card, CardContent, CardBody, CardMedia } from '@sberdevices/plasma-ui';
 import { Col } from '@sberdevices/plasma-ui/components/Grid';
-import PropTypes from 'prop-types';
 import { PAGES_TYPE } from '../Consts/Pages';
 import { useNavigate } from "react-router-dom"
 import { accent, primary } from '@salutejs/plasma-tokens'
@@ -14,8 +13,7 @@ export const DeviceCard = ({ id, image, name, status }:
         status: boolean
     }) => {
     const navigate = useNavigate()
-
-    function onClickDevice() {
+    const onClickDevice = () => {
         navigate(`${PAGES_TYPE.DEVICE}/${id}`)
     }
 

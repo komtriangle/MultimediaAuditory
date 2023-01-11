@@ -1,4 +1,4 @@
-import { DeviceState } from "../Models/DeviceState";
+import { DeviceState } from "../Classes/DeviceState";
 import IDeviceState from "./Interfaces/IDeviceState";
 import { store  } from "./store";
 

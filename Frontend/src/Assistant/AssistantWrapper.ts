@@ -15,21 +15,3 @@ export const initializeAssistant = (getState: any) => {
   }
   return createAssistant({getState});
 };
-
-export const AssistantWrapper = (type: string) => {
-  const assistantStateRef = useRef<any>();
-  const assistantRef = useRef<ReturnType<typeof createAssistant>>();
-  const sendAction = (action: any) => {
-    console.log(action);
-    return assistantRef?.current?.sendData({
-      action
-    })
-  }
-
-  const sendHello = () => {
-    sendAction({
-      action_id: "hello_phrase"
-    })
-  }
-
-}

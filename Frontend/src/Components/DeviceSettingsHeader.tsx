@@ -4,11 +4,9 @@ import { PAGES_TYPE } from "../Consts/Pages";
 import { useNavigate } from 'react-router-dom'
 
 
-function DeviceSettingsHeader() {
-
+export const DeviceSettingsHeader = () => {
     const navigate = useNavigate();
-
-    function onClickBack() {
+    const onClickBack = () => {
         navigate(`${PAGES_TYPE.DEVICES}`)
     }
 
@@ -23,5 +21,3 @@ function DeviceSettingsHeader() {
         </div>
     )
 }
-
-export default DeviceSettingsHeader;
