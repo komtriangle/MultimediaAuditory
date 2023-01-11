@@ -103,7 +103,12 @@
   },
   "devDependencies": {
     "@types/styled-components": "^5.1.26",
-    "cordova-android": "^10.1.0",
+    "cordova-android": "^10.1.2",
+    "cordova-plugin-audio-recorder": "^1.1.0",
+    "cordova-plugin-audioinput": "^1.0.2",
+    "cordova-plugin-background-mode": "^0.7.3",
+    "cordova-plugin-ble-central": "^1.6.1",
+    "cordova-plugin-device": "^2.1.0",
     "dotenv-webpack": "^8.0.1"
   },
   "jest": {
@@ -166,6 +171,13 @@
     "platforms": [
       "android"
     ],
-    "plugins": {}
+    "plugins": {
+      "cordova-plugin-audioinput": {},
+      "cordova-plugin-background-mode": {},
+      "cordova-plugin-ble-central": {
+        "ACCESS_BACKGROUND_LOCATION": "false"
+      },
+      "cordova-plugin-audio-recorder": {}
+    }
   }
 }

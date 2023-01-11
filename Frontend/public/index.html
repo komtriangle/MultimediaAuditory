@@ -36,22 +36,23 @@
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
 	 <script src="index.js"></script>
-   <script src="cordova.js" type="text/javascript"></script>
    <script crossorigin src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
   <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
   <script src="https://unpkg.com/@sberdevices/assistant-client@4.7.0/umd/assistant.development.min.js"></script>
   <script>
     const client = assistant.createSmartappDebugger({
-              // Токен из Кабинета разработчика
-              token: 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI3ZDEzODdhYWNkYmI2NGUzMDUxNzg0N2RlYTc4MDAzZjEwODYxNWJjZWRiMzU5ZmI4ZjViYjFlZDhiNDk1N2ZjNTM5YmU5MjcwMDQyNjI5OCIsImF1ZCI6IlZQUyIsImV4cCI6MTY3MzQ1NTg4OSwiaWF0IjoxNjczMzY5NDc5LCJpc3MiOiJLRVlNQVNURVIiLCJ0eXBlIjoiQmVhcmVyIiwianRpIjoiMWUxYWQ2NWItNDliYy00OTA3LWE4NzQtNWRkMzI0NzA1NWFmIiwic2lkIjoiMjM4ODU4MTItOGE1NC00NjhmLWFiNTItNDAzNjg2NWFjNDJlIn0.tY2AaQse9rH7xeFuOYdsUc1JFhrRCDn1jMzZt_365pBNwPrvpSxQhapoRiyL8_OH3Xn9o-DQOm8cc7wVHE9t7SOCcALbV0F6e3J4wlB2nyF24_7p9c3sbFy6JUk3TASDENTyk4PLuGIEMli9HcygK3AnzdhjS2L7Xt6H4Wbd27DPDHvjLhAwuFgigo23hoLKx132drbCGkY-z7QX9DeZaW-pIGxdgzGRPeTE-nojr638kEhfv5RGlqC6pYIGeL_Mn1J7vOcdB_UqW4VqNqv4fcmJ-N8YQA8ztfCDaLA3lC9HSV5aZzlo83ARp1FdaZJ1qPxOJUc0o_96BbVe9aYljPTZWX7W-MsVZ_hZmVqeWRsnsv5rqDn4CFWUZs3TZ-yTAIXOsS-3IWxGHc44tw7AqCAvFyIsND2MDM0HkGlYx-QDACbm1AYtXq2h30UgMt3bboNOE9Ddro1DUUhiCKUUAYnlPswGnKx02ESk-C8lcJk47PVZKbvgeL5bEgtD0lXHV6SGdElILJHzDx6bVDhiBsi4CtKjMugCIp0Wfb0qkh-Xe4oasAJ3-4L7FcRpL8fHPVyuZ_Mis-qPJmGUwZ6TFjq3vx3FGx9SaQ5k3wrrcjhzyzDe-SZGrEJo9RxIBzcSiFQ56R4R-yBPPHB_Ua32RmHHSqgegONbV25IZvKoqPw',
-              // Пример фразы для запуска смартапа
-              initPhrase: 'Хочу попкорн',
-              // Текущее состояние смартапа
-              getState: () => ({}),
-              // Состояние смартапа, с которым он будет восстановлен при следующем запуске
-              getRecoveryState: () => ({}),
-          });
+      // Токен из Кабинета разработчика
+      token: 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI3ZDEzODdhYWNkYmI2NGUzMDUxNzg0N2RlYTc4MDAzZjEwODYxNWJjZWRiMzU5ZmI4ZjViYjFlZDhiNDk1N2ZjNTM5YmU5MjcwMDQyNjI5OCIsImF1ZCI6IlZQUyIsImV4cCI6MTY3MzU0NjUyNiwiaWF0IjoxNjczNDYwMTE2LCJpc3MiOiJLRVlNQVNURVIiLCJ0eXBlIjoiQmVhcmVyIiwianRpIjoiZmIxZDlmNzYtM2E3MC00ODAzLWE4MWMtOTRiMDg2OGRlZmRkIiwic2lkIjoiZTRjNWJkM2UtOTYxMi00ODE3LWIzZDYtOTI4Mjk4ZmFlM2YxIn0.DQCAk_DSTnUh2YwWFaBiDiTaxEHgzk8EQVVkATKlHu0avm4KruyW9eZjY32ztxCS7JgBT7W3zwpNot2DwaSkK0PfUxlhCKv44kOg6H-9W8iZst80_HXSNugGp0u9381cd-Rps1aRGgJ7L6gozLg3UVQ3CKAEdZwLMsqaLkb3-ROdBI9QKd0_gK1jfIujYqu4xnVs3bfN7fffl9cTB-Ec19oU94zjBIH23S6fdEMam_xjkKTD_hR02SMlYrxnWpnhNfSYOuo64FqBRB88thyvcuaV0RQ2aiqDwWEWceZro6gbayOpAHdjmoBWOeN7NhE7qNyXAUDfQTdehI0hwC44ksojXqTnPDfKJk_MEVtRBZQ6YhN6_9SC7rx2S0YV0yhWHK2cM_6Xh5T7EhkG8zU6qIomwC5L6ovYhk1moIb4kjXkuTwvpyZSmta6znfm8TnseebP-c44G9EApfaGqvnzNA0r9DoozdJ9VsI7O5VouIeqbX8tgEdQM7TiZY6JSa5488QCeT8fL0dWW_nV2rbuOoCCovTLdnFfoGFGwvAAGsbzGB81w1cFqqORFZ5bJ6lyMTkBmT7FaN-DpegoCoQ4-aeO8i4YMsO3l8_ktybSAQ2UJ_ttR29FiZ87RnqHyBIaEMRZqoXeGJru3N9_TCqSLYVkcrTWjYdsPQaciZt0SuA',
+      // Пример фразы для запуска смартапа
+      initPhrase: 'Хочу попкорн',
+      // Текущее состояние смартапа
+      getState: () => ({}),
+      // Состояние смартапа, с которым он будет восстановлен при следующем запуске
+      getRecoveryState: () => ({}),
+  });
   </script>
+
+   <script src="cordova.js" type="text/javascript"></script>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.

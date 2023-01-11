@@ -28,17 +28,18 @@ import { createAssistant, createSmartappDebugger } from "@sberdevices/assistant-
 
 const App = (props: any) => {
   const { events } = Connector;
-  const assistantStateRef = useRef<any>();
- // const assistantRef = useRef<ReturnType<typeof createAssistant>>();
-  const [character, setCharacter] = useState<CharacterId>(CHAR_SBER);
+  // const assistantStateRef = useRef<any>();
+  // const assistantRef = useRef<ReturnType<typeof createAssistant>>();
+  
+   const [character, setCharacter] = useState<CharacterId>(CHAR_SBER);
   useEffect(() => {
     //Connector.subscribeForChanges();
     console.log("assistant")
   //  assistantRef.current = initializeAssistant(() => assistantStateRef.current);
-    //sendHello()
-    // assistantRef.current.on("data", (action: any) => {
-    //   handleAssistantDataEvent(action)
-    // });
+  //   sendHello()
+  //   assistantRef.current.on("data", (action: any) => {
+  //     handleAssistantDataEvent(action)
+  //   });
     events((state) => props.setDevices(getUpdatedState(state)),
       () => props.setConnectionStatus(ConnectionStatuses.Connected),
       () => props.setConnectionStatus(ConnectionStatuses.Disconnected))

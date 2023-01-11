@@ -1,0 +1,29 @@
+{
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {}
+  },
+  "installed_plugins": {
+    "cordova-plugin-audio-recorder": {
+      "PACKAGE_NAME": "com.sber.multimediaauditory"
+    },
+    "cordova-plugin-audioinput": {
+      "PACKAGE_NAME": "com.sber.multimediaauditory"
+    },
+    "cordova-plugin-background-mode": {
+      "PACKAGE_NAME": "com.sber.multimediaauditory"
+    },
+    "cordova-plugin-ble-central": {
+      "ACCESS_BACKGROUND_LOCATION": "false",
+      "PACKAGE_NAME": "com.sber.multimediaauditory"
+    }
+  },
+  "dependent_plugins": {
+    "cordova-plugin-device": {
+      "PACKAGE_NAME": "com.sber.multimediaauditory"
+    }
+  }
+}

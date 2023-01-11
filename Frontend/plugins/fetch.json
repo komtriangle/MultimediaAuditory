@@ -1,0 +1,42 @@
+{
+  "cordova-plugin-audioinput": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-audioinput"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-plugin-background-mode": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-background-mode"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-plugin-device": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-device"
+    },
+    "is_top_level": false,
+    "variables": {}
+  },
+  "cordova-plugin-ble-central": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-ble-central"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-plugin-audio-recorder": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-audio-recorder"
+    },
+    "is_top_level": true,
+    "variables": {}
+  }
+}
