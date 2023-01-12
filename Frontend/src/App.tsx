@@ -15,48 +15,48 @@ import { ConnectionStatuses } from './Consts/ConnectionStatuses';
 import { GlobalStyle, CharacterId, CHAR_SBER } from './Components/GlobalStyles';
 import { createAssistant, createSmartappDebugger } from "@sberdevices/assistant-client";
 
-// export const initializeAssistant = (getState: any) => {
-//   if (process.env.NODE_ENV === "development") {
-//     return createSmartappDebugger({
-//       token: process.env.REACT_APP_TOKEN ?? "",
-//       initPhrase: `Запусти ${process.env.REACT_APP_SMARTAPP}`,
-//       getState,
-//     });
-//   }
-//   return createAssistant({ getState });
-// };
+export const initializeAssistant = (getState: any) => {
+ // if (process.env.NODE_ENV === "development") {
+    return createSmartappDebugger({
+      token: process.env.REACT_APP_TOKEN ?? "",
+      initPhrase: `Запусти ${process.env.REACT_APP_SMARTAPP}`,
+      getState,
+    });
+ // }
+  return createAssistant({ getState });
+};
 
 const App = (props: any) => {
   const { events } = Connector;
-  // const assistantStateRef = useRef<any>();
-  // const assistantRef = useRef<ReturnType<typeof createAssistant>>();
+  const assistantStateRef = useRef<any>();
+  const assistantRef = useRef<ReturnType<typeof createAssistant>>();
   
    const [character, setCharacter] = useState<CharacterId>(CHAR_SBER);
   useEffect(() => {
-    //Connector.subscribeForChanges();
+    // Connector.subscribeForChanges();
     console.log("assistant")
-  //  assistantRef.current = initializeAssistant(() => assistantStateRef.current);
-  //   sendHello()
-  //   assistantRef.current.on("data", (action: any) => {
-  //     handleAssistantDataEvent(action)
-  //   });
+   assistantRef.current = initializeAssistant(() => assistantStateRef.current);
+    sendHello()
+    assistantRef.current.on("data", (action: any) => {
+      handleAssistantDataEvent(action)
+    });
     events((state) => props.setDevices(getUpdatedState(state)),
       () => props.setConnectionStatus(ConnectionStatuses.Connected),
       () => props.setConnectionStatus(ConnectionStatuses.Disconnected))
   }, []);
 
-  // const sendAction = (action: any) => {
-  //   console.log(action);
-  //   return assistantRef?.current?.sendData({
-  //     action
-  //   })
-  // }
+  const sendAction = (action: any) => {
+    console.log(action);
+    return assistantRef?.current?.sendData({
+      action
+    })
+  }
 
-  // const sendHello = () => {
-  //   sendAction({
-  //     action_id: "hello_phrase"
-  //   })
-  // }
+  const sendHello = () => {
+    sendAction({
+      action_id: "hello_phrase"
+    })
+  }
 
   const handleAssistantDataEvent = (event: any) => {
     console.log('AssistantWrapper.handleAssistantDataEvent: event:', event);

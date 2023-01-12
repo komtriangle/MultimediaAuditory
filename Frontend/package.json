@@ -80,7 +80,7 @@
   },
   "scripts": {
     "start": "env-cmd -f .env node scripts/start.js",
-    "build": "env-cmd -f .env node scripts/build.js && cordova build android",
+    "build": "env-cmd -f .env node scripts/build.js && cordova build android --release",
     "test": "node scripts/test.js"
   },
   "eslintConfig": {
