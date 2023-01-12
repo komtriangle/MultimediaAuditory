@@ -1,18 +1,16 @@
 import { IconChevronLeft } from "@sberdevices/plasma-icons";
 import { Headline1 } from "@sberdevices/plasma-ui";
-import { PAGES_TYPE } from "../../Consts/Pages";
-import {useNavigate} from 'react-router-dom'
+import { PAGES_TYPE } from "../Consts/Pages";
+import { useNavigate } from 'react-router-dom'
 
 
-function DeviceSettingsHeader(){
-
+export const DeviceSettingsHeader = () => {
     const navigate = useNavigate();
-
-    function onClickBack() {
+    const onClickBack = () => {
         navigate(`${PAGES_TYPE.DEVICES}`)
     }
 
-    return(
+    return (
         <div className='device-settings-header'>
             <div onClick={onClickBack} className='back-to-devices'>
                 <IconChevronLeft size="s" color="inherit" />
@@ -20,8 +18,6 @@ function DeviceSettingsHeader(){
             <div className='settings-header'>
                 <Headline1>Настройки</Headline1>
             </div>
-     </div>
+        </div>
     )
 }
-
-export default DeviceSettingsHeader;
