@@ -11,15 +11,18 @@ import { ConnectionStatuses } from '../Consts/ConnectionStatuses';
 const setDevices = "SET-DEVICES";
 const setConnectionStatus = "SET-CONNECTION_STATUS";
 
+
 export const initialState: IStore = {
     devices:
     [
         {
             id: "0",
             name:"Лампа 1",
+            // to-do lamp -> bulb
             type: DeviceTypes.Lamp,
             isOn: true,
-            image: lamp
+            image: lamp,
+
         },
         {
             id: "1",
@@ -60,6 +63,8 @@ export const storeActions = {
             }
         })
     }
+
+    
 }
 
 

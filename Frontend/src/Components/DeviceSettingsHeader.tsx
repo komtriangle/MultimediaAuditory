@@ -1,5 +1,5 @@
 import { IconChevronLeft } from "@sberdevices/plasma-icons";
-import { Headline1 } from "@sberdevices/plasma-ui";
+import { Headline2 } from "@sberdevices/plasma-ui";
 import { PAGES_TYPE } from "../Consts/Pages";
 import { useNavigate } from 'react-router-dom'
 
@@ -16,7 +16,7 @@ export const DeviceSettingsHeader = () => {
                 <IconChevronLeft size="s" color="inherit" />
             </div>
             <div className='settings-header'>
-                <Headline1>Настройки</Headline1>
+                <Headline2>Настройки</Headline2>
             </div>
         </div>
     )

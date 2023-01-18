@@ -19,6 +19,7 @@ const DocumentStyle = createGlobalStyle`
         background-color: ${background};
         background-image: ${gradient};
         min-height: 100vh;
+        overflow: hidden;
     }
 `;
 const ThemeBackgroundSber = createGlobalStyle(darkSber);
