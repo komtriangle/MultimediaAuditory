@@ -11,40 +11,34 @@ class Connector {
     constructor() {
         this.connection = new signalR.HubConnectionBuilder()
             .withUrl(process.env.REACT_APP_HUB_ADDRESS ?? "",
-            {
-                skipNegotiation: true,
-                transport: signalR.HttpTransportType.WebSockets
-            })
+                {
+                    skipNegotiation: true,
+                    transport: signalR.HttpTransportType.WebSockets
+                })
             .withAutomaticReconnect()
             .build();
-
         this.connect();
-        
         this.events = (onMessageReceived, onConnected, onDisconnected) => {
             this.connection.on("deviceChange", (state: DeviceState) => {
                 onMessageReceived(state);
             });
-
             this.onConnected = onConnected;
-
             this.connection.onclose(error => {
                 onDisconnected();
-              });
-            
-            this.connection.onreconnecting(error => { 
-            onDisconnected();
             });
-            
+            this.connection.onreconnecting(error => {
+                onDisconnected();
+            });
             this.connection.onreconnected(connectionId => {
                 onConnected();
                 this.subscribeForChanges();
             });
         };
     }
-    public State = () =>{
+    public State = () => {
         return this.connection.state;
     }
-    private subscribeForChanges = () =>{
+    private subscribeForChanges = () => {
         this.connection.send("SubscribeDevicesChanges").then(x => console.log("sent message to subscribe for devices updates"))
     }
     public sendCommand = (command: Command) => {
@@ -56,19 +50,18 @@ class Connector {
         return Connector.instance;
     }
 
-    public  async connect(){
+    public async connect() {
         let isConnected = false;
-        while(!isConnected){
+        while (!isConnected) {
             this.connection.start()
                 .then(_ => {
                     isConnected = true;
                     this.onConnected();
                     this.subscribeForChanges();
                 })
-                .catch(err => console.log(err));
-            await  new Promise( res => setTimeout(res, 1000) ); 
+            //.catch(err => console.log(err));
+            await new Promise(res => setTimeout(res, 1000));
         }
-
     }
 }
 export default Connector.getInstance();

@@ -3,12 +3,12 @@ import { DeviceCard } from '../Components/DeviceCard';
 import { connect } from "react-redux"
 import { bindActionCreators } from "redux";
 import IDeviceState from '../Store/Interfaces/IDeviceState';
-import { Headline1 } from "@sberdevices/plasma-ui";
+import { Headline2 } from "@sberdevices/plasma-ui";
 
 const DevicesPage = (props: any) => {
     return (
         <Container>
-            <Headline1 style={{ margin: "1em auto" }}>202 аудитория</Headline1>
+            <Headline2 style={{ margin: "1em auto" }}>202 аудитория</Headline2>
             <Row>
                 {props.devices.map((d: IDeviceState) => (
                     <DeviceCard
