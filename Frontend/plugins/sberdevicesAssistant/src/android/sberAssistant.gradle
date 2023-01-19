@@ -1,0 +1,22 @@
+repositories{    
+  jcenter()
+  flatDir {
+      dirs 'libs'
+   }
+}
+buildscript {
+dependencies {
+	classpath "ru.sberdevices.smartapp.sdk:appstate:1.0-alpha-2"
+	classpath "ru.sberdevices.smartapp.sdk:messaging:1.0-alpha-2"
+}
+}
+
+android {
+  packagingOptions {
+    exclude 'META-INF/LICENSE'
+	exclude 'META-INF/*.properties'
+	exclude 'META-INF/AL2.0'
+	exclude 'META-INF/LGPL2.1'
+	exclude 'META-INF/api.kotlin_module'
+  }
+}

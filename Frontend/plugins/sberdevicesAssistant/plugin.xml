@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android" id="sberdevices.assistant" version="0.1.0">
+   <name>sberdevicesAssistant</name>
+   <js-module name="sberdevicesAssistant" src="www/sberdevicesAssistant.js">
+      <clobbers target="cordova.plugins.sberdevicesAssistant" />
+   </js-module>
+   <platform name="android">
+      <config-file parent="/*" target="res/xml/config.xml">
+         <feature name="sberdevicesAssistant">
+            <param name="android-package" value="sberdevices.assistant.sberdevicesAssistant" />
+         </feature>
+      </config-file>
+      <config-file parent="/*" target="AndroidManifest.xml" />
+	  <framework src="src/android/sberAssistant.gradle" custom="true" type="gradleReference" />
+      <source-file src="src/android/sberdevicesAssistant.java" target-dir="src/sberdevices/assistant/sberdevicesAssistant" />
+	  <framework src="ru.sberdevices.smartapp.sdk:appstate:1.0-alpha-2" />
+	  <framework src="ru.sberdevices.smartapp.sdk:messaging:1.0-alpha-2" />
+   </platform>
+</plugin>

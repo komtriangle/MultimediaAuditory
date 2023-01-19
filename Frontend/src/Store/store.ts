@@ -2,6 +2,7 @@ import { DeviceTypes } from '../Consts/DeviceTypes';
 import IStore from './Interfaces/IStore'
 import lamp from '../Content/Images/lamp.png';
 import powerSocket from '../Content/Images/power-socket.png';
+import blinds from '../Content/Images/blinds.png';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from "redux-thunk";
 import { composeWithDevTools } from 'redux-devtools-extension';
@@ -34,6 +35,13 @@ export const initialState: IStore = {
             type: DeviceTypes.PowerSocket,
             isOn:false,
             image: powerSocket
+        },
+        {
+            id: "3",
+            name:"Жалюзи",
+            type: DeviceTypes.Blinds,
+            isOn:false,
+            image: blinds
         }
     ],
     Connection:{

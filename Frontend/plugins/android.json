@@ -19,6 +19,9 @@
     "cordova-plugin-ble-central": {
       "ACCESS_BACKGROUND_LOCATION": "false",
       "PACKAGE_NAME": "com.sber.multimediaauditory"
+    },
+    "sberdevices.assistant": {
+      "PACKAGE_NAME": "com.sber.multimediaauditory"
     }
   },
   "dependent_plugins": {

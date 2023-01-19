@@ -1,0 +1,17 @@
+{
+  "name": "sberdevices.assistant",
+  "version": "0.1.0",
+  "description": "",
+  "cordova": {
+    "id": "sberdevices.assistant",
+    "platforms": [
+      "android"
+    ]
+  },
+  "keywords": [
+    "ecosystem:cordova",
+    "cordova-android"
+  ],
+  "author": "",
+  "license": "ISC"
+}

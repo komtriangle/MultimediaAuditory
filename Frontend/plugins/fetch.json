@@ -38,5 +38,13 @@
     },
     "is_top_level": true,
     "variables": {}
+  },
+  "sberdevices.assistant": {
+    "source": {
+      "type": "local",
+      "path": "C:\\Programming\\multimedia-auditory\\Multimedia\\Frontend\\node_modules\\sberdevices.assistant"
+    },
+    "is_top_level": true,
+    "variables": {}
   }
 }

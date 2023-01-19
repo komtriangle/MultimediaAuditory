@@ -66,6 +66,7 @@
     "sass": "^1.57.1",
     "sass-loader": "^12.3.0",
     "semver": "^7.3.5",
+    "seq-logging": "^1.1.2",
     "source-map-loader": "^3.0.0",
     "style-loader": "^3.3.1",
     "styled-components": "^5.3.6",
@@ -80,7 +81,7 @@
   },
   "scripts": {
     "start": "env-cmd -f .env node scripts/start.js",
-    "build": "env-cmd -f .env node scripts/build.js && cordova build android --release",
+    "build": "env-cmd -f .env node scripts/build.js && cordova build android",
     "test": "node scripts/test.js"
   },
   "eslintConfig": {
@@ -109,7 +110,8 @@
     "cordova-plugin-background-mode": "^0.7.3",
     "cordova-plugin-ble-central": "^1.6.1",
     "cordova-plugin-device": "^2.1.0",
-    "dotenv-webpack": "^8.0.1"
+    "dotenv-webpack": "^8.0.1",
+    "sberdevices.assistant": "file:plugins/sberdevicesAssistant"
   },
   "jest": {
     "roots": [
@@ -177,7 +179,8 @@
       "cordova-plugin-ble-central": {
         "ACCESS_BACKGROUND_LOCATION": "false"
       },
-      "cordova-plugin-audio-recorder": {}
+      "cordova-plugin-audio-recorder": {},
+      "sberdevices.assistant": {}
     }
   }
 }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Routes, Route, HashRouter, } from 'react-router-dom';
 import './App.css';
 import LampPage from './Pages/LampPage';
@@ -8,33 +8,55 @@ import Connector from './SignalRConnector/Connector'
 import './Content/Styles/styles.scss';
 import { connect } from "react-redux"
 import { bindActionCreators } from "redux";
-import { initialState, storeActions } from './Store/store';
+import {  storeActions } from './Store/store';
 import getUpdatedState from './Store/devicesStateUpdater';
 import SpinnerPage from './Pages/SpinnerPage';
 import { ConnectionStatuses } from './Consts/ConnectionStatuses';
 import { GlobalStyle, CharacterId, CHAR_SBER } from './Components/GlobalStyles';
-import { createAssistant, createSmartappDebugger } from "@sberdevices/assistant-client";
+import { createAssistant } from "@sberdevices/assistant-client";
+import { handleAssistantAction } from './Assistant/AssistantWrapper';
 
 export const initializeAssistant = (getState: any) => {
- // if (process.env.NODE_ENV === "development") {
-    return createSmartappDebugger({
-      token: process.env.REACT_APP_TOKEN ?? "",
-      initPhrase: `Запусти ${process.env.REACT_APP_SMARTAPP}`,
-      getState,
-    });
- // }
+  // if (process.env.NODE_ENV === "development") {
+  //   return createSmartappDebugger({
+  //     token: process.env.REACT_APP_TOKEN ?? "",
+  //     initPhrase: `Запусти ${process.env.REACT_APP_SMARTAPP}`,
+  //     getState,
+  //   });
+  // }
   return createAssistant({ getState });
 };
 
+declare let window: any;
+
 const App = (props: any) => {
-  const { events, sendCommand } = Connector;
+
+  if (window.cordova) {
+    if (window.cordova.plugins) {
+     // alert("Crodova and plugins Found");
+      console.log(window.cordova.plugins)
+      window.cordova.plugins.sberdevicesAssistant.coolMethod('just string example', successMtd, errorMtd)
+    } 
+  }
+  function successMtd(message: any) {
+   // alert(message);
+}
+
+function errorMtd(message: any) {
+    //alert('Error! '+message);
+}
+
+
+  //window.cordova.plugins.cordova-sberdevices-assistant.coolMethod('just string example', successMtd, errorMtd);
+
+
+  const { events } = Connector;
   const assistantStateRef = useRef<any>();
   const assistantRef = useRef<ReturnType<typeof createAssistant>>();
   
    const [character, setCharacter] = useState<CharacterId>(CHAR_SBER);
   useEffect(() => {
     // Connector.subscribeForChanges();
-    console.log("assistant")
    assistantRef.current = initializeAssistant(() => assistantStateRef.current);
     sendHello()
     assistantRef.current.on("data", (action: any) => {
@@ -58,23 +80,7 @@ const App = (props: any) => {
     })
   }
 
-  const handleAssistantAction = (action: any) => {
-    console.log('AssistantWrapper.dispatchAssistantAction:', action)
-
-    if (!action) return;
-
-    switch (action.command) {
-
-      case 'on':
-        sendCommand({ DeviceId: `${action.id}`, ControlName: 'on-off', Value: 'on' });
-        break;
-      case 'off':
-        sendCommand({ DeviceId: `${action.id}`, ControlName: 'on-off', Value: 'off' });
-        break;
-      default:
-        break;
-    }
-  }
+ 
 
   const handleAssistantDataEvent = (event: any) => {
     console.log('AssistantWrapper.handleAssistantDataEvent: event:', event);
