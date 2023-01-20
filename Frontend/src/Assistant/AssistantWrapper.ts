@@ -1,4 +1,4 @@
-import {createAssistant, createSmartappDebugger} from "@sberdevices/assistant-client";
+import {createAssistant, createSmartappDebugger} from "@salutejs/client";
 import Connector from "../SignalRConnector/Connector";
 
 const { events, sendCommand } = Connector;

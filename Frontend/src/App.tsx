@@ -13,17 +13,17 @@ import getUpdatedState from './Store/devicesStateUpdater';
 import SpinnerPage from './Pages/SpinnerPage';
 import { ConnectionStatuses } from './Consts/ConnectionStatuses';
 import { GlobalStyle, CharacterId, CHAR_SBER } from './Components/GlobalStyles';
-import { createAssistant } from "@sberdevices/assistant-client";
+import { createAssistant, createSmartappDebugger } from "@salutejs/client";
 import { handleAssistantAction } from './Assistant/AssistantWrapper';
 
 export const initializeAssistant = (getState: any) => {
-  // if (process.env.NODE_ENV === "development") {
-  //   return createSmartappDebugger({
-  //     token: process.env.REACT_APP_TOKEN ?? "",
-  //     initPhrase: `Запусти ${process.env.REACT_APP_SMARTAPP}`,
-  //     getState,
-  //   });
-  // }
+  if (process.env.NODE_ENV === "development") {
+    return createSmartappDebugger({
+      token: process.env.REACT_APP_TOKEN ?? "",
+      initPhrase: `Запусти ${process.env.REACT_APP_SMARTAPP}`,
+      getState,
+    });
+  }
   return createAssistant({ getState });
 };
 
