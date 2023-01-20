@@ -40,6 +40,8 @@ services:
     volumes:
       - ../nginx/default.conf:/etc/nginx/default.conf
       - ../nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ../certbot/conf:/etc/letsencrypt
+      - ../certbot/www:/var/www/certbot
   seq:
     container_name: seq
     image: datalust/seq
@@ -54,5 +56,5 @@ services:
     image: certbot/certbot:latest
    # command: certonly --webroot --webroot-path=/var/www/certbot --email komlevdanila742@gmail.com --agree-tos --no-eff-email -d mir-misis.ru
     volumes:
-      - /var/www/certbot/:/var/www/certbot/:rw
-      - ../certbot/conf/:/etc/letsencrypt/:rw
+      - ../certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
