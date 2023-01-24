@@ -61,7 +61,7 @@
 .sun {
   box-sizing: border-box;
   position: relative;
-  left: 1.5%;
+  left: 12px;
   display: block;
   transform: scale(var(--ggs,1));
   width: 24px;
@@ -110,7 +110,7 @@
  .drop_opacity {
   box-sizing: border-box;
   position: relative;
-  left: 2%;
+  left: 16px;
   display: block;
   color:rgba(255, 255, 255, 0.705);
   transform: rotate(45deg) scale(var(--ggs,1));
@@ -138,7 +138,7 @@
   box-sizing: border-box;
   position: relative;
   display: block;
-  left: 2%;
+  left: 16px;
   color:rgba(255, 255, 255, 0.705);
   transform: rotate(45deg) scale(var(--ggs,1));
   width: 16px;
