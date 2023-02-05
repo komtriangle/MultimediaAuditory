@@ -1,9 +1,9 @@
 {
-  "name": "sberdevices.assistant",
+  "name": "sberDevices.Plugin",
   "version": "0.1.0",
   "description": "",
   "cordova": {
-    "id": "sberdevices.assistant",
+    "id": "sberDevices.Plugin",
     "platforms": [
       "android"
     ]

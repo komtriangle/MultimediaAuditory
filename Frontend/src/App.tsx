@@ -32,24 +32,22 @@ declare let window: any;
 const App = (props: any) => {
 
   if (window.cordova) {
+    console.log(window.cordova)
     if (window.cordova.plugins) {
      // alert("Crodova and plugins Found");
       console.log(window.cordova.plugins)
-      window.cordova.plugins.sberdevicesAssistant.coolMethod('just string example', successMtd, errorMtd)
+        window.cordova.plugins.sberDevicesPlugins.coolMethod("echo",successHandler, errorHandler);
     } 
   }
-  function successMtd(message: any) {
-   // alert(message);
+ 
+  
+function successHandler(message: any) {
+  console.log('success:', message);
 }
 
-function errorMtd(message: any) {
-    //alert('Error! '+message);
+function errorHandler(err: any) {
+  console.log('failed', err);
 }
-
-
-  //window.cordova.plugins.cordova-sberdevices-assistant.coolMethod('just string example', successMtd, errorMtd);
-
-
   const { events } = Connector;
   const assistantStateRef = useRef<any>();
   const assistantRef = useRef<ReturnType<typeof createAssistant>>();

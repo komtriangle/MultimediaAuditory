@@ -39,10 +39,10 @@
     "is_top_level": true,
     "variables": {}
   },
-  "sberdevices.assistant": {
+  "sberDevices.Plugin": {
     "source": {
       "type": "local",
-      "path": "C:\\Programming\\multimedia-auditory\\Multimedia\\Frontend\\node_modules\\sberdevices.assistant"
+      "path": "C:\\Programming\\multimedia-auditory\\Multimedia\\Frontend\\node_modules\\sberDevices.Plugin"
     },
     "is_top_level": true,
     "variables": {}
