@@ -19,10 +19,12 @@
 
 // Wait for the deviceready event before using any of Cordova's device APIs.
 // See https://cordova.apache.org/docs/en/latest/cordova/events/events.html#deviceready
-const startApp = () => {
-    ReactDOM.render(<App />, document.getElementById('root'));
-    registerServiceWorker();
-};
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(
+    <React.StrictMode>
+        <App />
+    </React.StrictMode>
+);
 
 if (window.cordova) {
     document.addEventListener('deviceready', startApp, false);

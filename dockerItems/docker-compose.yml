@@ -32,6 +32,17 @@ services:
     ports:
       - 1883:1883
       - 9001:9001
+  nginx:
+    image: nginx:latest
+    ports:
+      - '80:80'
+      - '443:443'
+    restart: always
+    volumes:
+      - ../nginx/default.conf:/etc/nginx/default.conf
+      - ../nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ../certbot/conf:/etc/letsencrypt
+      - ../certbot/www:/var/www/certbot
   seq:
     container_name: seq
     image: datalust/seq
@@ -42,3 +53,10 @@ services:
       - ../seq/data:/seq/data
     ports:
       - "5340:80"
+  certbot:
+    image: certbot/certbot:latest
+  # docker compose run --rm certbot certonly --webroot --webroot-path /var/www/certbot/ --dry-run -d domain_name -
+   # docker compose run --rm certbot certonly --webroot --webroot-path /var/www/certbot/ -d domain_name
+    volumes:
+      - ../certbot/conf:/etc/letsencrypt
+      - ../certbot/www:/var/www/certbot

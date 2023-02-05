@@ -1,0 +1,52 @@
+android {
+    sourceSets {
+        main.java {
+            srcDirs += 'src/main/kotlin'
+        }
+    }
+
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+    }
+}
+
+dependencies {
+    // SberDevices
+    implementation 'ru.sberdevices.smartapp:sdk:1.0.1'
+    implementation "ru.sberdevices.smartapp:cv:1.0.1"
+
+    // Uncomment to test local fat aar
+//    implementation files('../common.aar')
+//    implementation files('../cv.aar')
+//    implementation files('../sdk.aar')
+
+    // Android
+    implementation "androidx.appcompat:appcompat:$versions.androidx.appcompat"
+    implementation "androidx.core:core-ktx:$versions.androidx.core"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.androidx.lifecycle"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$versions.androidx.lifecycle"
+    implementation "androidx.constraintlayout:constraintlayout:$versions.androidx.constraintlayout"
+    implementation "androidx.navigation:navigation-fragment-ktx:$versions.androidx.navigation"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.kotlinxCoroutinesAndroid"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$versions.kotlinxCoroutines"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin"
+
+    implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:$versions.kotlinxSerializations"
+
+    implementation "com.airbnb.android:lottie:$versions.lottie"
+
+    // Third parties
+    implementation "com.google.code.gson:gson:$versions.gson"
+    implementation "com.google.protobuf:protobuf-lite:$versions.protobuf_lite"
+    implementation "io.insert-koin:koin-android:$versions.koin"
+    implementation "io.insert-koin:koin-androidx-viewmodel:$versions.koin"
+
+
+    testImplementation "androidx.arch.core:core-testing:$versions.androidx_core_testing"
+    testImplementation "io.mockk:mockk:$versions.mockk"
+    testImplementation "junit:junit:$versions.junit"
+
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$versions.kotlinxCoroutines"
+}
+
+   

@@ -1,1 +1,1 @@
-export enum DeviceTypes {Lamp, PowerSocket }; 
+export enum DeviceTypes {Lamp, PowerSocket, Blinds }; 

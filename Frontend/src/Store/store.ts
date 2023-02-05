@@ -1,7 +1,8 @@
 import { DeviceTypes } from '../Consts/DeviceTypes';
 import IStore from './Interfaces/IStore'
 import lamp from '../Content/Images/lamp.png';
-import powerSocket from '../Content/Images/output-onlinepngtools.png';
+import powerSocket from '../Content/Images/power-socket.png';
+import blinds from '../Content/Images/blinds.png';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from "redux-thunk";
 import { composeWithDevTools } from 'redux-devtools-extension';
@@ -11,15 +12,18 @@ import { ConnectionStatuses } from '../Consts/ConnectionStatuses';
 const setDevices = "SET-DEVICES";
 const setConnectionStatus = "SET-CONNECTION_STATUS";
 
+
 export const initialState: IStore = {
     devices:
     [
         {
             id: "0",
             name:"Лампа 1",
+            // to-do lamp -> bulb
             type: DeviceTypes.Lamp,
             isOn: true,
-            image: lamp
+            image: lamp,
+
         },
         {
             id: "1",
@@ -31,9 +35,16 @@ export const initialState: IStore = {
         {
             id: "2",
             name:"Розетка 1",
-            type: DeviceTypes.Lamp,
+            type: DeviceTypes.PowerSocket,
             isOn:false,
             image: powerSocket
+        },
+        {
+            id: "3",
+            name:"Жалюзи",
+            type: DeviceTypes.Blinds,
+            isOn:false,
+            image: blinds
         }
     ],
     Connection:{
@@ -60,6 +71,8 @@ export const storeActions = {
             }
         })
     }
+
+    
 }
 
 

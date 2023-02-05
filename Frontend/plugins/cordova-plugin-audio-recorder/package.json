@@ -1,0 +1,30 @@
+{
+  "version": "1.1.0",
+  "name": "cordova-plugin-audio-recorder",
+  "cordova_name": "AudioRecorder",
+  "description": "Record Audio easily with the device microphone",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cocowalla/cordova-plugin-audiorecorder.git"
+  },
+  "author": "OutSystems",
+  "contributors": [
+    {
+      "name": "cocowalla",
+      "url": "https://github.com/cocowalla"
+    }
+  ],
+  "issue": "",
+  "keywords": [],
+  "platforms": [
+    "android",
+    "ios"
+  ],
+  "engines": [
+    {
+      "name": "cordova",
+      "version": ">=3.5.0"
+    }
+  ]
+}
