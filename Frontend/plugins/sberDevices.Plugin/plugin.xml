@@ -17,9 +17,13 @@
         </config-file>
 		
 	<framework src="ru.sberdevices.smartapp:sdk:1.0.1" />
-	<framework src="io.mockk:mockk:1.13.4" />
+	<framework src="io.insert-koin:koin-android:3.3.2"/>
+	<framework src="io.mockk:mockk:1.12.5"/>
+<!--	<framework src="io.insert-koin:koin-androidx-viewmodel:2.2.3"/>-->
 	 <source-file src="src/android/build-extras.gradle" target-dir="."/>
 	<source-file src="src/android/sberDevicesPlugins.kt" target-dir="src/main/kotlin/sberDevicesPlugins" />
-	  
+	<source-file src="src/android/SberAssistant.kt" target-dir="src/main/kotlin/SberAssistant" />
+
+
 </platform>
 </plugin>
